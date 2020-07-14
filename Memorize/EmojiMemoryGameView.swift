@@ -21,7 +21,7 @@ struct EmojiMemoryGameView: View {
         }
         .padding()
         .foregroundColor(Color.orange)
-        .font(Font.largeTitle)
+        .font(viewModel.cards.count < 10 ? Font.largeTitle : Font.title)
     }
 }
 
@@ -34,18 +34,19 @@ struct CardView: View {
         }
     }
     
-        func body(for size: CGSize) -> some View {
-            ZStack {
-                if card.isFaceUp {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white )
-                    RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
-                    Text(card.content)
-                } else {
-                    RoundedRectangle(cornerRadius: cornerRadius).fill()
-                }
+    func body(for size: CGSize) -> some View {
+        ZStack {
+            if card.isFaceUp {
+                RoundedRectangle(cornerRadius: cornerRadius).fill(Color.white )
+                RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
+                Text(card.content)
+            } else {
+                RoundedRectangle(cornerRadius: cornerRadius).fill()
             }
-            .font(Font.system(size: fontSize(for:size)))
         }
+        .font(Font.system(size: fontSize(for:size)))
+        .aspectRatio(2/3, contentMode: .fit)
+    }
     
     // MARK: - Drawing Constants
     
